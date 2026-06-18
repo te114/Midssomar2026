@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<title>Mästarnas Midsommar 2026</title>
+<style>
+  /* ---------- Reset & base ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #1f3a2e;
+    background:
+      radial-gradient(circle at 10% 10%, rgba(255,255,255,0.6), transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(255,236,150,0.5), transparent 40%),
+      linear-gradient(180deg, #cfe9f7 0%, #e8f5e1 60%, #fff8d6 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1, h2, h3 { font-family: 'Georgia', serif; letter-spacing: 0.5px; }
+
+  /* ---------- Decorative floral background ---------- */
+  .flora {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    overflow: hidden;
+  }
+  .flower {
+    position: absolute; font-size: 2.2rem; opacity: 0.55;
+    animation: floaty 9s ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+  }
+  @keyframes floaty {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-14px) rotate(8deg); }
+  }
+
+  /* ---------- App container ---------- */
+  .app { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; padding: 24px 18px 80px; }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 22px;
+    padding: 28px 24px;
+    box-shadow: 0 10px 30px rgba(31, 58, 46, 0.12), 0 2px 6px rgba(31, 58, 46, 0.06);
+    border: 1px solid rgba(255,255,255,0.7);
+    animation: fadeInUp 0.5s ease both;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---------- Typography ---------- */
+  .title {
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    text-align: center;
+    color: #14532d;
+    text-shadow: 0 2px 0 rgba(255,255,255,0.6);
+    line-height: 1.1;
+  }
+  .subtitle {
+    text-align: center; margin-top: 12px; color: #2a5a47;
+    font-style: italic; font-size: clamp(1rem, 2.4vw, 1.2rem);
+  }
+  .section-title {
+    font-size: clamp(1.4rem, 3.6vw, 2rem);
+    color: #14532d; text-align: center; margin-bottom: 18px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: none; cursor: pointer; user-select: none;
+    font-family: inherit; font-size: 1.1rem; font-weight: 700;
+    padding: 16px 26px; border-radius: 16px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+    min-height: 56px;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary {
+    background: linear-gradient(180deg, #fde68a, #f5c518);
+    color: #3b2a00;
+    box-shadow: 0 6px 0 #b88a00, 0 10px 18px rgba(0,0,0,0.12);
+  }
+  .btn-primary:hover { filter: brightness(1.05); }
+  .btn-secondary {
+    background: linear-gradient(180deg, #ffffff, #e6f1ff);
+    color: #0b3b66;
+    box-shadow: 0 6px 0 #7fb3e6, 0 10px 18px rgba(0,0,0,0.10);
+  }
+  .btn-success {
+    background: linear-gradient(180deg, #bbf7d0, #4ade80);
+    color: #064e2b;
+    box-shadow: 0 6px 0 #166534, 0 10px 18px rgba(0,0,0,0.12);
+  }
+  .btn-danger {
+    background: linear-gradient(180deg, #fecaca, #f87171);
+    color: #5a0a0a;
+    box-shadow: 0 4px 0 #991b1b, 0 8px 14px rgba(0,0,0,0.10);
+  }
+  .btn-ghost {
+    background: rgba(255,255,255,0.7); color: #14532d;
+    box-shadow: inset 0 0 0 1px rgba(20,83,45,0.2);
+  }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 22px; }
+  .btn-small { padding: 10px 14px; font-size: 0.95rem; min-height: 42px; border-radius: 12px; }
+
+  /* ---------- Inputs ---------- */
+  input[type="text"], input[type="number"] {
+    font-family: inherit; font-size: 1rem;
+    padding: 12px 14px; border-radius: 12px;
+    border: 1px solid #c7e0d1; background: #fff;
+    width: 100%; outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+  }
+  input:focus { border-color: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,0.25); }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 18px; gap: 10px;
+  }
+  .home-btn {
+    background: rgba(255,255,255,0.8); color: #14532d;
+    border: none; cursor: pointer; padding: 10px 14px;
+    border-radius: 12px; font-family: inherit; font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .badge {
+    background: #14532d; color: #fff7d6;
+    padding: 8px 14px; border-radius: 999px; font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+
+  /* ---------- Team list ---------- */
+  .team-add { display: flex; gap: 10px; margin: 14px 0 22px; flex-wrap: wrap; }
+  .team-add input { flex: 1; min-width: 200px; }
+  .team-list { display: grid; gap: 12px; }
+  .team-row {
+    background: #ffffffcc; border-radius: 16px; padding: 14px 16px;
+    display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    border-left: 6px solid #4ade80;
+    animation: fadeInUp 0.3s ease both;
+  }
+  .team-row.leader { border-left-color: #f5c518; background: linear-gradient(90deg, #fff7c2, #ffffffcc); }
+  .team-name-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .team-name { font-weight: 700; font-size: 1.15rem; color: #14532d; flex: 1; min-width: 140px; }
+  .team-name-input { font-weight: 700; font-size: 1.05rem; padding: 8px 10px; }
+  .team-score { font-size: 1.6rem; font-weight: 800; color: #0b3b66; min-width: 50px; text-align: center; }
+  .team-controls { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .crown { font-size: 1.3rem; }
+
+  /* ---------- Home menu ---------- */
+  .menu-grid { display: grid; gap: 14px; margin-top: 28px; }
+  @media (min-width: 640px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
+  .menu-card {
+    background: linear-gradient(135deg, #ffffffcc, #f4fff0cc);
+    border-radius: 18px; padding: 22px; text-align: center;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    border: 1px solid rgba(255,255,255,0.7);
+  }
+  .menu-card:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(0,0,0,0.12); }
+  .menu-card .emoji { font-size: 2.4rem; display: block; margin-bottom: 8px; }
+  .menu-card .label { font-weight: 700; color: #14532d; font-size: 1.15rem; }
+  .menu-card .desc { color: #466b58; font-size: 0.9rem; margin-top: 4px; }
+
+  /* ---------- Mission / Quiz card ---------- */
+  .feature-card {
+    background: linear-gradient(135deg, #fffbe6, #e6f7ff);
+    border-radius: 20px; padding: 30px 24px; margin-top: 20px;
+    text-align: center; min-height: 180px;
+    display: flex; flex-direction: column; justify-content: center;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.7), 0 8px 22px rgba(0,0,0,0.08);
+    animation: pop 0.4s ease both;
+  }
+  @keyframes pop {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .feature-label { color: #466b58; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+  .feature-text { font-size: clamp(1.2rem, 3.2vw, 1.6rem); color: #14532d; line-height: 1.4; }
+  .answer { margin-top: 16px; font-size: 1.2rem; color: #0b3b66; font-weight: 700; }
+
+  /* ---------- Challenges list ---------- */
+  .challenge {
+    background: #ffffffcc; border-radius: 16px; padding: 18px; margin-top: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border-top: 5px solid #7fb3e6;
+  }
+  .challenge h3 { color: #14532d; font-size: 1.2rem; margin-bottom: 4px; }
+  .challenge p { color: #2a5a47; margin-bottom: 12px; }
+  .award-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .award-grid select { font-family: inherit; padding: 10px 12px; border-radius: 10px; border: 1px solid #c7e0d1; background: #fff; flex: 1; min-width: 140px; }
+  .scoring-hint { font-size: 0.85rem; color: #466b58; font-style: italic; margin-top: 8px; }
+
+  /* ---------- Quiz sections ---------- */
+  .section-tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 16px; }
+  .tab {
+    padding: 10px 14px; border-radius: 999px; border: none;
+    background: rgba(255,255,255,0.8); color: #14532d;
+    font-family: inherit; font-weight: 700; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .tab.active { background: #14532d; color: #fff7d6; }
+
+  /* ---------- Winner page ---------- */
+  .winner-wrap { text-align: center; padding: 20px 10px; }
+  .trophy { font-size: 6rem; display: inline-block; animation: trophyBounce 2s ease-in-out infinite; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.2)); }
+  @keyframes trophyBounce {
+    0%,100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+  }
+  .winner-name {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    color: #b88a00; margin: 14px 0;
+    text-shadow: 0 2px 0 #fff;
+  }
+  .final-scoreboard {
+    text-align: left; margin: 24px auto 0; max-width: 480px;
+    display: grid; gap: 10px;
+  }
+  .final-row {
+    display: flex; justify-content: space-between; align-items: center;
+    background: #ffffffcc; padding: 12px 16px; border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  }
+  .final-row.first { background: linear-gradient(90deg, #fff7c2, #ffffff); border-left: 6px solid #f5c518; }
+  .final-row.second { border-left: 6px solid #c0c0c0; }
+  .final-row.third { border-left: 6px solid #cd7f32; }
+
+  /* ---------- Confetti ---------- */
+  #confetti-canvas {
+    position: fixed; inset: 0; pointer-events: none; z-index: 999;
+  }
+
+  /* ---------- Utilities ---------- */
+  .hidden { display: none !important; }
+  .center { text-align: center; }
+  .muted { color: #466b58; }
+  .spaced { margin-top: 18px; }
+
+  @media (max-width: 480px) {
+    .btn { font-size: 1rem; padding: 14px 18px; }
+    .card { padding: 22px 16px; border-radius: 18px; }
+    .team-row { grid-template-columns: 1fr; }
+    .team-controls { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="flora" id="flora"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<div class="app" id="app"></div>
+
+<script>
+/* ============================================================
+   Mästarnas Midsommar 2026 — Single-file offline web app
+   ============================================================ */
+
+/* ---------------- Floral background ---------------- */
+(function decorate() {
+  const flora = document.getElementById('flora');
+  const emojis = ['🌼','🌸','🌻','🌿','🌷','💐','🍀'];
+  const count = window.innerWidth < 600 ? 10 : 18;
+  for (let i = 0; i < count; i++) {
+    const span = document.createElement('span');
+    span.className = 'flower';
+    span.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    span.style.top = Math.random()*100 + 'vh';
+    span.style.left = Math.random()*100 + 'vw';
+    span.style.fontSize = (1.4 + Math.random()*2.4) + 'rem';
+    span.style.animationDelay = (Math.random()*6) + 's';
+    span.style.animationDuration = (7 + Math.random()*6) + 's';
+    span.style.opacity = (0.25 + Math.random()*0.5).toFixed(2);
+    flora.appendChild(span);
+  }
+})();
+
+/* ---------------- State ---------------- */
+const state = {
+  view: 'home',
+  teams: [],   // {id, name, score}
+  mission: null,
+  challengeIndex: 0,
+  quizSection: 'musik',
+  quizIndex: 0,
+  showAnswer: false,
+};
+
+function uid() { return Math.random().toString(36).slice(2, 9); }
+
+/* ---------------- Data ---------------- */
+const MISSIONS = [
+  "Få någon att säga jordgubbe.",
+  "Få någon att sjunga en sång.",
+  "Få någon att prata om sin semester.",
+  "Få någon att visa en bild på sin telefon.",
+  "Få någon att ge dig en komplimang.",
+  "Få någon att berätta en pinsam historia.",
+  "Få någon att nämna vädret.",
+  "Få någon att skratta högt.",
+  "Få någon att ställa en fråga till dig.",
+  "Få någon att resa sig upp."
+];
+
+const CHALLENGES = [
+  { title: "Stövelkastning", desc: "Kasta en stövel så långt som möjligt." },
+  { title: "Potatisbalans", desc: "Ta dig genom banan med en potatis på en sked." },
+  { title: "Kotteprecision", desc: "Träffa en hink med kottar eller bollar." },
+  { title: "Naturtornet", desc: "Bygg högsta möjliga torn av naturmaterial på två minuter." },
+  { title: "Vattenstafett", desc: "Flytta vatten mellan två hinkar. Mest vatten vinner." },
+  { title: "Quiz Sprint", desc: "Spring runt markeringen innan laget får svara." },
+  { title: "Mänsklig Knop", desc: "Lös upp knuten utan att släppa taget." },
+];
+
+const QUIZ = {
+  musik: {
+    title: "Musik",
+    questions: [
+      { q: "Vilken svensk grupp vann Eurovision med låten Waterloo?", a: "ABBA" },
+      { q: "Vem sjunger låten Sommartider?", a: "Gyllene Tider" },
+      { q: "Vilken svensk artist sjunger Dancing On My Own?", a: "Robyn" },
+      { q: "Vilket instrument spelar man vanligtvis med trumpinnar?", a: "Trummor" },
+      { q: "Hur många medlemmar hade ABBA?", a: "4" },
+    ]
+  },
+  historia: {
+    title: "Svensk Historia",
+    questions: [
+      { q: "När firar Sverige sin nationaldag?", a: "6 juni" },
+      { q: "Varför firar Sverige nationaldagen?", a: "För att Gustav Vasa valdes till kung den 6 juni 1523 och för att Sverige fick en ny regeringsform år 1809." },
+      { q: 'Hur fortsätter raden i Sveriges nationalsång: "Då ärat ditt namn flög över jorden..."', a: '"...jag vet att du är och du blir vad du var."' },
+      { q: "Vad heter Sveriges kung?", a: "Carl XVI Gustaf" },
+    ]
+  },
+  sommar: {
+    title: "Sommar & Midsommar",
+    questions: [
+      { q: "Hur många blommor brukar man lägga under kudden på midsommarnatten?", a: "7" },
+      { q: "Vilken månad firas midsommar?", a: "Juni" },
+      { q: "Vad heter stången som reses på midsommar?", a: "Midsommarstång" },
+      { q: "Vilket bär förknippas mest med svensk sommar?", a: "Jordgubbe" },
+      { q: "Vilket hav ligger öster om Sverige?", a: "Östersjön" },
+    ]
+  },
+  utslag: {
+    title: "Utslagsfråga",
+    questions: [
+      { q: "Hur många kilometer kust har Sverige?", a: "Cirka 3200 km" },
+    ]
+  }
+};
+
+/* ---------------- Render helpers ---------------- */
+const app = document.getElementById('app');
+function render() {
+  app.innerHTML = '';
+  let view;
+  switch (state.view) {
+    case 'home': view = renderHome(); break;
+    case 'teams': view = renderTeams(); break;
+    case 'games': view = renderGamesMenu(); break;
+    case 'mission': view = renderMissions(); break;
+    case 'challenges': view = renderChallenges(); break;
+    case 'quiz': view = renderQuiz(); break;
+    case 'winner': view = renderWinner(); break;
+    default: view = renderHome();
+  }
+  app.appendChild(view);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function el(tag, attrs = {}, children = []) {
+  const node = document.createElement(tag);
+  for (const k in attrs) {
+    if (k === 'class') node.className = attrs[k];
+    else if (k === 'html') node.innerHTML = attrs[k];
+    else if (k.startsWith('on') && typeof attrs[k] === 'function') {
+      node.addEventListener(k.slice(2).toLowerCase(), attrs[k]);
+    } else if (k === 'value') node.value = attrs[k];
+    else node.setAttribute(k, attrs[k]);
+  }
+  (Array.isArray(children) ? children : [children]).forEach(c => {
+    if (c == null || c === false) return;
+    node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+  });
+  return node;
+}
+
+function topbar(showHome = true, rightBadge = null) {
+  const bar = el('div', { class: 'topbar' });
+  if (showHome) {
+    bar.appendChild(el('button', {
+      class: 'home-btn',
+      onclick: () => { state.view = 'home'; render(); }
+    }, ['🏵️ Hem']));
+  } else {
+    bar.appendChild(el('span'));
+  }
+  if (rightBadge) {
+    bar.appendChild(el('span', { class: 'badge' }, [rightBadge]));
+  } else {
+    bar.appendChild(el('span'));
+  }
+  return bar;
+}
+
+/* ---------------- HOME ---------------- */
+function renderHome() {
+  const wrap = el('div');
+  const card = el('div', { class: 'card center' });
+  card.appendChild(el('div', { class: 'center', html: '🌼🌸🌻' , style: 'font-size:2.2rem;margin-bottom:6px;'}));
+  card.appendChild(el('h1', { class: 'title' }, ['Mästarnas Midsommar 2026']));
+  card.appendChild(el('p', { class: 'subtitle' }, ['En kväll fylld av skratt, tävlingar och överraskningar']));
+
+  const btnRow = el('div', { class: 'btn-row' });
+  btnRow.appendChild(el('button', {
+    class: 'btn btn-primary',
+    onclick: () => {
+      if (state.teams.length === 0) {
+        state.view = 'teams'; render();
+      } else {
+        state.view = 'games'; render();
+      }
+    }
+  }, ['🎉 Starta spel']));
+  btnRow.appendChild(el('button', {
+    class: 'btn btn-secondary',
+    onclick: () => { state.view = 'teams'; render(); }
+  }, ['👥 Skapa lag']));
+  card.appendChild(btnRow);
+
+  const menu = el('div', { class: 'menu-grid' });
+  menu.appendChild(menuCard('🕵️', 'Hemliga Uppdrag', 'Slumpa hemliga uppdrag till deltagarna', () => { state.view = 'mission'; render(); }));
+  menu.appendChild(menuCard('🏆', 'Mästarnas Midsommar', '7 utmaningar utomhus', () => { state.view = 'challenges'; render(); }));
+  menu.appendChild(menuCard('❓', 'Midsommarquiz', 'Frågor om musik, historia och sommar', () => { state.view = 'quiz'; render(); }));
+  menu.appendChild(menuCard('👑', 'Visa Vinnare', 'Kröna Midsommarmästaren', () => {
+    if (state.teams.length === 0) { alert('Lägg till lag först!'); return; }
+    state.view = 'winner'; render();
+  }));
+  card.appendChild(menu);
+
+  wrap.appendChild(card);
+  return wrap;
+}
+function menuCard(emoji, label, desc, onClick) {
+  return el('div', { class: 'menu-card', onclick: onClick }, [
+    el('span', { class: 'emoji' }, [emoji]),
+    el('div', { class: 'label' }, [label]),
+    el('div', { class: 'desc' }, [desc])
+  ]);
+}
+
+/* ---------------- TEAMS ---------------- */
+function renderTeams() {
+  const wrap = el('div');
+  wrap.appendChild(topbar(true, `Lag: ${state.teams.length}`));
+
+  const card = el('div', { class: 'card' });
+  card.appendChild(el('h2', { class: 'section-title' }, ['👥 Lagöversikt']));
+
+  const addRow = el('div', { class: 'team-add' });
+  const input = el('input', { type: 'text', placeholder: 'Lagets namn...' });
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') addBtn.click(); });
+  const addBtn = el('button', {
+    class: 'btn btn-success',
+    onclick: () => {
+      const name = input.value.trim();
+      if (!name) return;
+      state.teams.push({ id: uid(), name, score: 0 });
+      render();
+    }
+  }, ['➕ Lägg till lag']);
+  addRow.appendChild(input);
+  addRow.appendChild(addBtn);
+  card.appendChild(addRow);
+
+  if (state.teams.length === 0) {
+    card.appendChild(el('p', { class: 'center muted' }, ['Inga lag ännu. Lägg till det första laget ovan!']));
+  } else {
+    const sorted = [...state.teams].sort((a,b) => b.score - a.score);
+    const topScore = sorted[0]?.score ?? 0;
+    const list = el('div', { class: 'team-list' });
+    sorted.forEach(team => {
+      const isLeader = team.score === topScore && topScore > 0;
+      const row = el('div', { class: 'team-row' + (isLeader ? ' leader' : '') });
+
+      const nameWrap = el('div', { class: 'team-name-wrap' });
+      if (isLeader) nameWrap.appendChild(el('span', { class: 'crown' }, ['👑']));
+      const nameInput = el('input', { type: 'text', class: 'team-name-input', value: team.name });
+      nameInput.addEventListener('change', (e) => {
+        team.name = e.target.value.trim() || team.name;
+        render();
+      });
+      nameWrap.appendChild(nameInput);
+      row.appendChild(nameWrap);
+
+      const right = el('div');
+      right.style.display = 'flex'; right.style.alignItems = 'center'; right.style.gap = '10px'; right.style.flexWrap = 'wrap'; right.style.justifyContent = 'flex-end';
+      right.appendChild(el('div', { class: 'team-score' }, [String(team.score)]));
+      const controls = el('div', { class: 'team-controls' });
+      [-1, 1, 3, 5].forEach(delta => {
+        controls.appendChild(el('button', {
+          class: 'btn btn-small ' + (delta > 0 ? 'btn-success' : 'btn-danger'),
+          onclick: () => { team.score = Math.max(0, team.score + delta); render(); }
+        }, [(delta > 0 ? '+' : '') + delta]));
+      });
+      controls.appendChild(el('button', {
+        class: 'btn btn-small btn-ghost',
+        onclick: () => { if (confirm('Ta bort ' + team.name + '?')) { state.teams = state.teams.filter(t => t.id !== team.id); render(); } }
+      }, ['🗑️']));
+      right.appendChild(controls);
+      row.appendChild(right);
+      list.appendChild(row);
+    });
+    card.appendChild(list);
+  }
+
+  const btnRow = el('div', { class: 'btn-row' });
+  btnRow.appendChild(el('button', {
+    class: 'btn btn-primary',
+    onclick: () => {
+      if (state.teams.length === 0) { alert('Lägg till minst ett lag först!'); return; }
+      state.view = 'games'; render();
+    }
+  }, ['🎉 Till spelen']));
+  card.appendChild(btnRow);
+
+  wrap.appendChild(card);
+  return wrap;
+}
+
+/* ---------------- GAMES MENU ---------------- */
+function renderGamesMenu() {
+  const wrap = el('div');
+  wrap.appendChild(topbar(true, `Lag: ${state.teams.length}`));
+  const card = el('div', { class: 'card' });
+  card.appendChild(el('h2', { class: 'section-title' }, ['🎮 Välj spel']));
+  const menu = el('div', { class: 'menu-grid' });
+  menu.appendChild(menuCard('🕵️', 'Spel 1 — Hemliga Uppdrag', 'Slumpa ett hemligt uppdrag', () => { state.view = 'mission'; render(); }));
+  menu.appendChild(menuCard('🏆', 'Spel 2 — Mästarnas Midsommar', '7 fysiska utmaningar', () => { state.view = 'challenges'; render(); }));
+  menu.appendChild(menuCard('❓', 'Spel 3 — Midsommarquiz', 'Quizfrågor', () => { state.view = 'quiz'; render(); }));
+  menu.appendChild(menuCard('👑', 'Kröna vinnaren', 'Visa midsommarmästaren', () => { state.view = 'winner'; render(); }));
+  card.appendChild(menu);
+  wrap.appendChild(card);
+  return wrap;
+}
+
+/* ---------------- MISSIONS ---------------- */
+function renderMissions() {
+  const wrap = el('div');
+  wrap.appendChild(topbar());
+  const card = el('div', { class: 'card' });
+  card.appendChild(el('h2', { class: 'section-title' }, ['🕵️ Spel 1 — Hemliga Uppdrag']));
+  card.appendChild(el('p', { class: 'center muted' }, [
+    'Alla deltagare får ett hemligt uppdrag som ska genomföras utan att någon misstänker något. Om någon gissar uppdraget korrekt får personen inga poäng. Genomförda uppdrag ger poäng.'
+  ]));
+
+  const feature = el('div', { class: 'feature-card' });
+  feature.appendChild(el('div', { class: 'feature-label' }, ['Ditt hemliga uppdrag']));
+  feature.appendChild(el('div', { class: 'feature-text' }, [state.mission || 'Tryck på knappen för att slumpa ett uppdrag 🌼']));
+  card.appendChild(feature);
+
+  const btnRow = el('div', { class: 'btn-row' });
+  btnRow.appendChild(el('button', {
+    class: 'btn btn-primary',
+    onclick: () => {
+      let next;
+      do { next = MISSIONS[Math.floor(Math.random()*MISSIONS.length)]; }
+      while (next === state.mission && MISSIONS.length > 1);
+      state.mission = next; render();
+    }
+  }, ['🎲 Slumpa hemligt uppdrag']));
+  card.appendChild(btnRow);
+
+  // Quick scoring shortcut
+  if (state.teams.length > 0) {
+    const quick = el('div', { class: 'spaced' });
+    quick.appendChild(el('p', { class: 'center muted' }, ['Tilldela poäng för genomfört uppdrag:']));
+    const grid = el('div', { class: 'award-grid spaced' });
+    state.teams.forEach(team => {
+      grid.appendChild(el('button', {
+        class: 'btn btn-small btn-success',
+        onclick: () => { team.score += 2; render(); }
+      }, [`+2 ${team.name}`]));
+    });
+    quick.appendChild(grid);
+    card.appendChild(quick);
+  }
+
+  wrap.appendChild(card);
+  return wrap;
+}
+
+/* ---------------- CHALLENGES ---------------- */
+function renderChallenges() {
+  const wrap = el('div');
+  wrap.appendChild(topbar());
+  const card = el('div', { class: 'card' });
+  card.appendChild(el('h2', { class: 'section-title' }, ['🏆 Spel 2 — Mästarnas Midsommar']));
+  card.appendChild(el('p', { class: 'center muted' }, ['Rekommenderad poäng: 1:a = 5p, 2:a = 3p, 3:a = 1p']));
+
+  CHALLENGES.forEach((ch, i) => {
+    const block = el('div', { class: 'challenge' });
+    block.appendChild(el('h3', {}, [`Utmaning ${i+1}: ${ch.title}`]));
+    block.appendChild(el('p', {}, [ch.desc]));
+
+    if (state.teams.length > 0) {
+      [{label: '🥇 1:a (+5)', pts: 5}, {label: '🥈 2:a (+3)', pts: 3}, {label: '🥉 3:a (+1)', pts: 1}].forEach(opt => {
+        const row = el('div', { class: 'award-grid', style: 'margin-top:6px;' });
+        const select = el('select');
+        select.appendChild(el('option', { value: '' }, ['— Välj lag —']));
+        state.teams.forEach(t => select.appendChild(el('option', { value: t.id }, [t.name])));
+        const btn = el('button', {
+          class: 'btn btn-small btn-primary',
+          onclick: () => {
+            const team = state.teams.find(t => t.id === select.value);
+            if (!team) { alert('Välj ett lag först'); return; }
+            team.score += opt.pts;
+            render();
+          }
+        }, [opt.label]);
+        row.appendChild(select); row.appendChild(btn);
+        block.appendChild(row);
+      });
+    } else {
+      block.appendChild(el('p', { class: 'scoring-hint' }, ['Lägg till lag för att tilldela poäng.']));
+    }
+
+    card.appendChild(block);
+  });
+
+  wrap.appendChild(card);
+  return wrap;
+}
+
+/* ---------------- QUIZ ---------------- */
+function renderQuiz() {
+  const wrap = el('div');
+  wrap.appendChild(topbar());
+  const card = el('div', { class: 'card' });
+  card.appendChild(el('h2', { class: 'section-title' }, ['❓ Spel 3 — Midsommarquiz']));
+
+  const tabs = el('div', { class: 'section-tabs' });
+  Object.keys(QUIZ).forEach(key => {
+    tabs.appendChild(el('button', {
+      class: 'tab' + (state.quizSection === key ? ' active' : ''),
+      onclick: () => { state.quizSection = key; state.quizIndex = 0; state.showAnswer = false; render(); }
+    }, [QUIZ[key].title]));
+  });
+  card.appendChild(tabs);
+
+  const section = QUIZ[state.quizSection];
+  const total = section.questions.length;
+  const idx = state.quizIndex % total;
+  const q = section.questions[idx];
+
+  const feature = el('div', { class: 'feature-card' });
+  feature.appendChild(el('div', { class: 'feature-label' }, [`${section.title} — Fråga ${idx+1} av ${total}`]));
+  feature.appendChild(el('div', { class: 'feature-text' }, [q.q]));
+  if (state.showAnswer) feature.appendChild(el('div', { class: 'answer' }, ['✅ ' + q.a]));
+  card.appendChild(feature);
+
+  const btnRow = el('div', { class: 'btn-row' });
+  btnRow.appendChild(el('button', {
+    class: 'btn btn-secondary',
+    onclick: () => { state.showAnswer = !state.showAnswer; render(); }
+  }, [state.showAnswer ? '🙈 Dölj svar' : '👀 Visa svar']));
+  btnRow.appendChild(el('button', {
+    class: 'btn btn-primary',
+    onclick: () => { state.quizIndex = (idx + 1) % total; state.showAnswer = false; render(); }
+  }, ['➡️ Nästa fråga']));
+  card.appendChild(btnRow);
+
+  if (state.teams.length > 0) {
+    const quick = el('div', { class: 'spaced' });
+    quick.appendChild(el('p', { class: 'center muted' }, ['Tilldela poäng för rätt svar:']));
+    const grid = el('div', { class: 'award-grid spaced' });
+    state.teams.forEach(team => {
+      grid.appendChild(el('button', {
+        class: 'btn btn-small btn-success',
+        onclick: () => { team.score += 1; render(); }
+      }, [`+1 ${team.name}`]));
+    });
+    quick.appendChild(grid);
+    card.appendChild(quick);
+  }
+
+  wrap.appendChild(card);
+  return wrap;
+}
+
+/* ---------------- WINNER ---------------- */
+function renderWinner() {
+  const wrap = el('div');
+  wrap.appendChild(topbar());
+  const card = el('div', { class: 'card winner-wrap' });
+
+  if (state.teams.length === 0) {
+    card.appendChild(el('p', { class: 'muted' }, ['Inga lag att kröna ännu.']));
+    wrap.appendChild(card); return wrap;
+  }
+
+  const sorted = [...state.teams].sort((a,b) => b.score - a.score);
+  const winner = sorted[0];
+
+  card.appendChild(el('h2', { class: 'section-title' }, ['👑 Midsommarmästare 2026']));
+  card.appendChild(el('div', { class: 'trophy' }, ['🏆']));
+  card.appendChild(el('div', { class: 'winner-name' }, [winner.name]));
+  card.appendChild(el('p', { class: 'muted' }, [`Med ${winner.score} poäng`]));
+
+  const scoreboard = el('div', { class: 'final-scoreboard' });
+  sorted.forEach((t, i) => {
+    let cls = 'final-row';
+    if (i === 0) cls += ' first';
+    else if (i === 1) cls += ' second';
+    else if (i === 2) cls += ' third';
+    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
+    scoreboard.appendChild(el('div', { class: cls }, [
+      el('span', {}, [`${medal} ${t.name}`]),
+      el('strong', {}, [`${t.score} p`])
+    ]));
+  });
+  card.appendChild(scoreboard);
+
+  card.appendChild(el('p', { class: 'spaced muted', style: 'font-style:italic;max-width:520px;margin:24px auto 0;' }, [
+    'Tack för en fantastisk midsommar fylld med skratt, gemenskap och tävlingsanda! 🌼'
+  ]));
+
+  const btnRow = el('div', { class: 'btn-row' });
+  btnRow.appendChild(el('button', {
+    class: 'btn btn-primary',
+    onclick: () => fireConfetti(160)
+  }, ['🎊 Mer konfetti!']));
+  btnRow.appendChild(el('button', {
+    class: 'btn btn-secondary',
+    onclick: () => { state.view = 'home'; render(); }
+  }, ['🏵️ Till start']));
+  card.appendChild(btnRow);
+
+  wrap.appendChild(card);
+
+  // celebrate on enter
+  setTimeout(() => fireConfetti(220), 200);
+
+  return wrap;
+}
+
+/* ---------------- Confetti ---------------- */
+const canvas = document.getElementById('confetti-canvas');
+const ctx = canvas.getContext('2d');
+let confettiPieces = [];
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const CONFETTI_COLORS = ['#f5c518','#4ade80','#7fb3e6','#ffffff','#f87171','#a78bfa','#fbbf24'];
+
+function fireConfetti(amount = 150) {
+  for (let i = 0; i < amount; i++) {
+    confettiPieces.push({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * canvas.height * 0.3,
+      r: 4 + Math.random() * 6,
+      c: CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],
+      vx: -2 + Math.random()*4,
+      vy: 2 + Math.random()*4,
+      rot: Math.random()*Math.PI*2,
+      vr: -0.2 + Math.random()*0.4,
+      shape: Math.random() < 0.5 ? 'rect' : 'circle',
+      life: 0
+    });
+  }
+  if (!confettiAnimating) animateConfetti();
+}
+
+let confettiAnimating = false;
+function animateConfetti() {
+  confettiAnimating = true;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  confettiPieces.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.rot += p.vr; p.life++;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.fillStyle = p.c;
+    if (p.shape === 'rect') ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+    else { ctx.beginPath(); ctx.arc(0,0,p.r/2,0,Math.PI*2); ctx.fill(); }
+    ctx.restore();
+  });
+  confettiPieces = confettiPieces.filter(p => p.y < canvas.height + 30 && p.life < 600);
+  if (confettiPieces.length > 0) requestAnimationFrame(animateConfetti);
+  else { confettiAnimating = false; ctx.clearRect(0,0,canvas.width,canvas.height); }
+}
+
+/* ---------------- Boot ---------------- */
+render();
+</script>
+</body>
+</html>
